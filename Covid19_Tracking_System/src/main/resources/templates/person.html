@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>View Person</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<h1>View Person</h1>
+	<a th:href="@{/user/persons}">Back to Person List</a>
+	<br />
+	<br />
+	<div th:if="${person}">
+		<table border="0">
+			<tr>
+				<td>ID</td>
+				<td>:</td>
+				<td th:utext="${person.id}">...</td>
+			</tr>
+			<tr>
+				<td>Name</td>
+				<td>:</td>
+				<td th:utext="${person.name}">...</td>
+			</tr>
+			<tr>
+				<td>Phone</td>
+				<td>:</td>
+				<td th:utext="${person.contactNumber}">...</td>
+			</tr>
+			<tr>
+				<td>District</td>
+				<td>:</td>
+				<td th:utext="${person.district}">...</td>
+			</tr>
+			<tr>
+				<td>Province</td>
+				<td>:</td>
+				<td th:utext="${person.province}">...</td>
+			</tr>
+			<tr>
+				<td>Status</td>
+				<td></td>
+				<td th:utext="${person.status}">...</td>
+			</tr>
+			<tr>
+				<td>Case Origin</td>
+				<td></td>
+				<td th:utext="${person.caseOrigin}">...</td>
+			</tr>
+		</table>
+		<br />
+		<br />
+		<div th:if="not ${allowDelete}">
+			<a th:href="@{/person/{id}/edit(id=${person.id})}">Edit</a> | <a
+				th:href="@{/person/{id}/delete(id=${person.id})}">Delete</a>
+		</div>
+		<form th:if="${allowDelete}"
+			th:action="@{/person/{id}/delete(id=${person.id})}" method="POST">
+			Delete this person? <input type="submit" th:value="Yes" />
+		</form>
+	</div>
+	<div th:if="${errorMessage}" th:utext="${errorMessage}" class="error" />
+</body>
+</html>

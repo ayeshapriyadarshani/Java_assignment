@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Person Summary</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<h1>Person Summary</h1>
+
+	<div>
+		<nobr>
+			<!-- <a th:href="@{/person/add}">Add Person</a> |  -->
+			<a th:href="@{/}">Back to Index</a>
+		</nobr>
+	</div>
+	<br />
+	<br />
+	<div>
+		<table border="1">
+			<tr>
+				<th>DEAD</th>
+				<th>RECOVERED</th>
+				<th>STILL IN HOSPITAL</th>
+
+			</tr>
+			<tr>
+				<td th:utext="${dead}">...</td>
+				<td th:utext="${recoveredCount}">...</td>
+				<td th:utext="${stillHospitalCount}">...</td>
+
+
+			</tr>
+		</table>
+		<br>
+		<br>
+		<table border="1">
+			<tr>
+				<th>IMPORTED CASES</th>
+				<th>COMMUNITY CASES</th>
+				<th>TOTAL</th>
+
+			</tr>
+			<tr>
+
+				<td th:utext="${imported}">...</td>
+				<td th:utext="${community}">...</td>
+				<td th:utext="${totalCases}">...</td>
+
+			</tr>
+		</table>
+	</div>
+	<br />
+	<br />
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${add} ? 'Create a Person' : 'Edit a Person'" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<h1 th:text="${add} ? 'Create a Person:' : 'Edit a Person:'" />
+	<a th:href="@{/user/persons}">Back to Person List</a>
+	<br />
+	<br />
+	<form
+		th:action="${add} ? @{/person/add} : @{/person/{id}/edit(id=${person.id})}"
+		th:object="${person}" method="POST">
+		<table border="0">
+			<tr th:if="${person.id}">
+				<td>ID</td>
+				<td>:</td>
+				<td th:utext="${person.id}">...</td>
+			</tr>
+			<tr>
+				<td>Name</td>
+				<td>:</td>
+				<td><input type="text" th:field="*{name}" /></td>
+			</tr>
+			<tr>
+				<td>Phone</td>
+				<td>:</td>
+				<td><input type="text" th:field="*{contactNumber}" /></td>
+			</tr>
+			<tr>
+				<td>District</td>
+				<td>:</td>
+				<td><input type="text" th:field="*{district}" /></td>
+			</tr>
+			<tr>
+				<th>Address</th>
+				<!-- <td>House Number</td>
+                    <td>:</td>
+                    <td><input type="text" th:field="*{address.houseNumber}" size="50" /></td>  -->
+			</tr>
+			<tr>
+				<td>Street</td>
+				<td></td>
+				<td><input type="text" th:field="*{address.street}" size="50" /></td>
+			</tr>
+			<tr>
+				<td>City</td>
+				<td></td>
+				<td><input type="text" th:field="*{address.city}" size="50" /></td>
+			</tr>
+			<tr>
+				<td>Province</td>
+				<td>:</td>
+				<td><input type="text" th:field="*{province}" /></td>
+			</tr>
+
+
+			<tr>
+				<td>Case Origin</td>
+				<td>:</td>
+				<td><select name="caseOrigin" th:field="*{caseOrigin}">
+						<option
+							th:each="caseOrigin : ${T(com.wiley.covid19.model.CaseOrigin).values()}"
+							th:value="${caseOrigin}" th:text="${caseOrigin}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td>Status</td>
+				<td>:</td>
+				<td><select name="status" th:field="*{status}">
+						<option
+							th:each="status : ${T(com.wiley.covid19.model.Status).values()}"
+							th:value="${status}" th:text="${status}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td>Date</td>
+				<td>:</td>
+				<td><input type="date" th:field="*{confirmedDate}" /></td>
+			</tr>
+		</table>
+		<input type="submit" th:value="${add} ? 'Create' : 'Update'" />
+	</form>
+
+	<br />
+	<!-- Check if errorMessage is not null and not empty -->
+	<div th:if="${errorMessage}" th:utext="${errorMessage}" class="error" />
+</body>
+</html>
